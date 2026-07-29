@@ -9,11 +9,6 @@ export type TaskFormState = {
   message: string;
 };
 
-export const initialTaskFormState: TaskFormState = {
-  status: "idle",
-  message: "",
-};
-
 export async function createTaskAction(
   _previousState: TaskFormState,
   formData: FormData,

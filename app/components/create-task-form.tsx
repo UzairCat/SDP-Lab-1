@@ -2,10 +2,12 @@
 
 import { useActionState, useEffect, useRef } from "react";
 import { useFormStatus } from "react-dom";
-import {
-  createTaskAction,
-  initialTaskFormState,
-} from "../../src/tasks/actions";
+import { createTaskAction, type TaskFormState } from "../../src/tasks/actions";
+
+const initialTaskFormState: TaskFormState = {
+  status: "idle",
+  message: "",
+};
 
 export function CreateTaskForm() {
   const [state, formAction] = useActionState(
