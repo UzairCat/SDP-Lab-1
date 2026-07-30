@@ -158,6 +158,4 @@ This repository does not use AI in-line editing tools.
 
 This repository makes use of AI code review using the following tools: Codex[GPT-5].
 
-AI usage transcripts for planning, code generation, debugging, and review should be exported from the Codex conversation and submitted with the repository link.
-
 AI Declaration: The preceding document was generated, reviewed, and edited with the assistance of Codex[GPT-5].
