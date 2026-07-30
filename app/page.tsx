@@ -26,7 +26,6 @@ export default async function Home({ searchParams }: HomeProps) {
     <main className="shell">
       <section className="page-header" aria-labelledby="page-title">
         <div>
-          <p className="eyebrow">COMS3011A Lab 1</p>
           <h1 id="page-title">Local Todo</h1>
           <p className="lede">
             Create tasks with a topic and due date, then track their current
