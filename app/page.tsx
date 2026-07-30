@@ -1,6 +1,7 @@
 import { CreateTaskForm } from "./components/create-task-form";
 import { SortControls } from "./components/sort-controls";
 import { ArchivedTaskCard, TaskCard } from "./components/task-card";
+import { ThemeToggle } from "./components/theme-toggle";
 import {
   listActiveTasks,
   listArchivedTasks,
@@ -32,20 +33,23 @@ export default async function Home({ searchParams }: HomeProps) {
             status from one local SQLite database.
           </p>
         </div>
-        <dl className="summary">
-          <div>
-            <dt>Active</dt>
-            <dd>{tasks.length}</dd>
-          </div>
-          <div>
-            <dt>Overdue</dt>
-            <dd>{overdueCount}</dd>
-          </div>
-          <div>
-            <dt>Archived</dt>
-            <dd>{archivedTasks.length}</dd>
-          </div>
-        </dl>
+        <div className="header-tools">
+          <ThemeToggle />
+          <dl className="summary">
+            <div>
+              <dt>Active</dt>
+              <dd>{tasks.length}</dd>
+            </div>
+            <div>
+              <dt>Overdue</dt>
+              <dd>{overdueCount}</dd>
+            </div>
+            <div>
+              <dt>Archived</dt>
+              <dd>{archivedTasks.length}</dd>
+            </div>
+          </dl>
+        </div>
       </section>
 
       <section className="workspace" aria-label="Task workspace">

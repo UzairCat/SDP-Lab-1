@@ -12,7 +12,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                var mode = window.localStorage.getItem("todo-appearance-mode");
+                document.documentElement.dataset.theme = mode === "dark" ? "dark" : "light";
+              } catch (_) {}
+            `,
+          }}
+        />
+      </head>
       <body>{children}</body>
     </html>
   );

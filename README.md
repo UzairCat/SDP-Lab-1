@@ -1,5 +1,7 @@
 # COMS3011A Lab 1 Todo
 
+Student Number: 2802191, Name: Uzair Mahomed
+
 A local-first todo application built with Next.js and SQLite for COMS3011A Lab 1.
 The app runs locally for a single user and stores tasks in `data/todo.db`.
 
