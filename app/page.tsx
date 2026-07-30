@@ -30,7 +30,7 @@ export default async function Home({ searchParams }: HomeProps) {
           <h1 id="page-title">Local Todo</h1>
           <p className="lede">
             Create tasks with a topic and due date, then track their current
-            status from one local SQLite database.
+            status.
           </p>
         </div>
         <div className="header-tools">
