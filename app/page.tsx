@@ -1,12 +1,25 @@
 import { CreateTaskForm } from "./components/create-task-form";
+import { SortControls } from "./components/sort-controls";
 import { ArchivedTaskCard, TaskCard } from "./components/task-card";
-import { listActiveTasks, listArchivedTasks } from "../src/tasks/service";
+import {
+  listActiveTasks,
+  listArchivedTasks,
+  type TaskSort,
+} from "../src/tasks/service";
 
 export const dynamic = "force-dynamic";
 
-export default function Home() {
-  const tasks = listActiveTasks({ sortBy: "dueDate" });
-  const archivedTasks = listArchivedTasks({ sortBy: "dueDate", sortDirection: "desc" });
+type HomeProps = {
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+};
+
+export default async function Home({ searchParams }: HomeProps) {
+  const activeSort = getSortValue((await searchParams)?.sort);
+  const tasks = listActiveTasks({ sortBy: activeSort });
+  const archivedTasks = listArchivedTasks({
+    sortBy: "dueDate",
+    sortDirection: "desc",
+  });
   const overdueCount = tasks.filter((task) => task.isOverdue).length;
 
   return (
@@ -49,6 +62,7 @@ export default function Home() {
             <h2 id="active-tasks-title">Active Tasks</h2>
             <span>{tasks.length} total</span>
           </div>
+          <SortControls activeSort={activeSort} />
 
           {tasks.length > 0 ? (
             <ul className="task-list">
@@ -83,4 +97,14 @@ export default function Home() {
       </section>
     </main>
   );
+}
+
+function getSortValue(value: string | string[] | undefined): TaskSort {
+  const sort = Array.isArray(value) ? value[0] : value;
+
+  if (sort === "topic" || sort === "status" || sort === "dueDate") {
+    return sort;
+  }
+
+  return "dueDate";
 }
