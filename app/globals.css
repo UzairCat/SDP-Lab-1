@@ -89,7 +89,7 @@ h1 {
 
 .summary {
   display: grid;
-  grid-template-columns: repeat(2, minmax(96px, 1fr));
+  grid-template-columns: repeat(3, minmax(96px, 1fr));
   gap: 12px;
   margin: 0;
 }
@@ -203,13 +203,37 @@ h1 {
   padding: 10px 14px;
 }
 
-.primary-button:hover {
-  background: var(--accent-strong);
+.secondary-button {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--foreground);
+  cursor: pointer;
+  font-weight: 800;
+  padding: 9px 13px;
 }
 
-.primary-button:disabled {
+.primary-button:hover,
+.secondary-button:hover {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+  color: #fff;
+}
+
+.primary-button:disabled,
+.secondary-button:disabled {
   cursor: wait;
   opacity: 0.7;
+}
+
+.danger-button {
+  border-color: #f2b8b5;
+  color: var(--danger);
+}
+
+.danger-button:hover {
+  background: var(--danger);
+  border-color: var(--danger);
 }
 
 .form-message {
@@ -300,6 +324,47 @@ h1 {
 .task-meta dd {
   margin: 4px 0 0;
   overflow-wrap: anywhere;
+}
+
+.task-actions {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.task-actions form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.edit-task {
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+
+.edit-task summary {
+  width: fit-content;
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.edit-task summary:hover {
+  color: var(--accent-strong);
+}
+
+.compact-form {
+  margin-top: 14px;
+}
+
+.archive-panel {
+  grid-column: 1 / -1;
+}
+
+.archived-task {
+  background: #fafafa;
 }
 
 .empty-state {
