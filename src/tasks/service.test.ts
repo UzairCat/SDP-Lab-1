@@ -43,7 +43,6 @@ describe("task service", () => {
         description: "Document schema and setup",
         dueDate: "2026-08-04",
         topic: "Documentation",
-        status: "Todo",
       },
       db,
     );

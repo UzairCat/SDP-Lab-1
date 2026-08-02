@@ -39,15 +39,6 @@ export function CreateTaskForm() {
           <span>Due date</span>
           <input name="dueDate" type="date" required />
         </label>
-
-        <label className="field">
-          <span>Status</span>
-          <select name="status" defaultValue="Todo">
-            <option value="Todo">Todo</option>
-            <option value="In-Progress">In-Progress</option>
-            <option value="Complete">Complete</option>
-          </select>
-        </label>
       </div>
 
       <label className="field">
