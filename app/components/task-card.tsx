@@ -19,6 +19,7 @@ type TaskCardProps = {
 };
 
 export function TaskCard({ task }: TaskCardProps) {
+  const editFormKey = `${task.id}-${task.updatedAt}`;
   const [editState, editAction] = useActionState(
     updateTaskAction,
     initialFormState,
@@ -64,7 +65,11 @@ export function TaskCard({ task }: TaskCardProps) {
       <div className="task-actions">
         <details className="edit-task">
           <summary>Edit</summary>
-          <form action={editAction} className="task-form compact-form">
+          <form
+            action={editAction}
+            className="task-form compact-form"
+            key={editFormKey}
+          >
             <input name="id" type="hidden" value={task.id} />
             <div className="form-grid">
               <label className="field">
