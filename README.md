@@ -3,10 +3,16 @@
 Student Number: 2802191, Name: Uzair Mahomed
 
 A local-first todo application built with Next.js and SQLite for COMS3011A Lab 1.
-The app runs locally for a single user and stores tasks in `data/todo.db`.
-New tasks start as `Todo`; use inline editing to update task details and move tasks between `Todo`, `In-Progress`, and `Complete`.
-Archived tasks are kept out of the main list until the `View Archived Tasks` control is opened.
-The interface defaults to dark mode and remembers the selected appearance mode in the browser.
+
+## Features
+
+- Local SQLite task storage in `data/todo.db`.
+- Task creation with title, topic, due date, and description.
+- New tasks default to `Todo`.
+- Inline editing for task details and status changes.
+- Status tracking with `Todo`, `In-Progress`, and `Complete`.
+- Archived tasks stay hidden until `View Archived Tasks` is opened.
+- Dark-mode default with browser-based appearance preference saving.
 
 ## Running It
 
@@ -43,9 +49,9 @@ npm run build
 
 ## Documentation
 
-- Detailed running instructions: [docs/running-it.md](docs/running-it.md)
-- Third-party code and dependencies: [docs/dependencies.md](docs/dependencies.md)
-- Database design: [docs/database-design.md](docs/database-design.md)
+- [Running Guide](docs/running-it.md)
+- [Dependencies](docs/dependencies.md)
+- [Database Design](docs/database-design.md)
 
 ## Testing
 
