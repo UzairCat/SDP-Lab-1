@@ -443,6 +443,13 @@ h1 {
   overflow: hidden;
 }
 
+.task-item-editing {
+  border-color: var(--accent);
+  box-shadow:
+    inset 0 0 0 1px var(--accent),
+    0 18px 44px rgba(0, 0, 0, 0.22);
+}
+
 .task-item::before {
   position: absolute;
   top: 0;
@@ -458,6 +465,10 @@ h1 {
   align-items: flex-start;
   justify-content: space-between;
   gap: 16px;
+}
+
+.task-main-edit {
+  align-items: stretch;
 }
 
 .task-main h3 {
@@ -513,15 +524,21 @@ h1 {
   padding-top: 14px;
 }
 
+.edit-meta {
+  align-items: end;
+}
+
 .task-meta dd {
   margin: 4px 0 0;
   overflow-wrap: anywhere;
 }
 
 .task-actions {
-  display: grid;
+  display: flex;
+  align-items: flex-start;
   gap: 12px;
   margin-top: 16px;
+  flex-wrap: wrap;
 }
 
 .task-actions form {
@@ -531,25 +548,114 @@ h1 {
   flex-wrap: wrap;
 }
 
-.edit-task {
-  border-top: 1px solid var(--border);
-  padding-top: 12px;
+.edit-primary-fields {
+  display: grid;
+  flex: 1;
+  gap: 14px;
+  min-width: 0;
 }
 
-.edit-task summary {
-  width: fit-content;
-  cursor: pointer;
-  color: var(--accent);
+.inline-edit-form {
+  gap: 16px;
+}
+
+.status-editor {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  min-width: 170px;
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--field);
+  padding: 12px;
+}
+
+.status-editor legend {
+  color: var(--muted);
+  font-size: 0.78rem;
   font-weight: 800;
-  list-style-position: inside;
+  text-transform: uppercase;
 }
 
-.edit-task summary:hover {
-  color: var(--accent-strong);
+.status-choice {
+  cursor: pointer;
 }
 
-.compact-form {
-  margin-top: 14px;
+.status-choice input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.status-choice span {
+  display: flex;
+  align-items: center;
+  min-height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+  justify-content: center;
+  padding: 6px 10px;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.status-choice:hover span {
+  border-color: var(--accent);
+  color: var(--foreground);
+  transform: translateY(-1px);
+}
+
+.status-choice:has(input:focus-visible) span {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.status-choice.todo:has(input:checked) span {
+  border-color: var(--warning);
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+
+.status-choice.in-progress:has(input:checked) span {
+  border-color: var(--progress-fg);
+  background: var(--progress-bg);
+  color: var(--progress-fg);
+}
+
+.status-choice.complete:has(input:checked) span {
+  border-color: var(--success);
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.state-preview {
+  display: grid;
+  gap: 6px;
+}
+
+.state-preview > span {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.state-preview p {
+  margin: 0;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+}
+
+.edit-footer {
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
 }
 
 .archive-panel {
@@ -634,5 +740,13 @@ h1 {
 
   .task-main {
     display: grid;
+  }
+
+  .task-main-edit {
+    grid-template-columns: 1fr;
+  }
+
+  .status-editor {
+    min-width: 0;
   }
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { useFormStatus } from "react-dom";
 import {
   archiveTaskAction,
@@ -14,11 +14,14 @@ const initialFormState: TaskFormState = {
   message: "",
 };
 
+const statusOptions = ["Todo", "In-Progress", "Complete"] as const;
+
 type TaskCardProps = {
   task: TaskView;
 };
 
 export function TaskCard({ task }: TaskCardProps) {
+  const [isEditing, setIsEditing] = useState(false);
   const editFormKey = `${task.id}-${task.updatedAt}`;
   const [editState, editAction] = useActionState(
     updateTaskAction,
@@ -28,6 +31,112 @@ export function TaskCard({ task }: TaskCardProps) {
     archiveTaskAction,
     initialFormState,
   );
+
+  useEffect(() => {
+    if (editState.status === "success") {
+      setIsEditing(false);
+    }
+  }, [editState.status, task.updatedAt]);
+
+  if (isEditing) {
+    return (
+      <li className="task-item task-item-editing">
+        <form
+          action={editAction}
+          className="task-form inline-edit-form"
+          key={editFormKey}
+        >
+          <input name="id" type="hidden" value={task.id} />
+
+          <div className="task-main task-main-edit">
+            <div className="edit-primary-fields">
+              <label className="field">
+                <span>Title</span>
+                <input
+                  name="title"
+                  required
+                  maxLength={120}
+                  defaultValue={task.title}
+                />
+              </label>
+
+              <label className="field">
+                <span>Description</span>
+                <textarea
+                  name="description"
+                  rows={3}
+                  defaultValue={task.description}
+                />
+              </label>
+            </div>
+
+            <fieldset className="status-editor">
+              <legend>Status</legend>
+              {statusOptions.map((status) => (
+                <label
+                  className={`status-choice ${statusClassName(status)}`}
+                  key={status}
+                >
+                  <input
+                    defaultChecked={task.status === status}
+                    name="status"
+                    type="radio"
+                    value={status}
+                  />
+                  <span>{status}</span>
+                </label>
+              ))}
+            </fieldset>
+          </div>
+
+          <div className="task-meta edit-meta">
+            <label className="field">
+              <span>Topic</span>
+              <input
+                name="topic"
+                required
+                maxLength={80}
+                defaultValue={task.topic}
+              />
+            </label>
+
+            <label className="field">
+              <span>Due date</span>
+              <input
+                name="dueDate"
+                type="date"
+                required
+                defaultValue={task.dueDate}
+              />
+            </label>
+
+            <div className="state-preview">
+              <span>State</span>
+              <p>
+                {task.isOverdue ? (
+                  <span className="overdue">Overdue</span>
+                ) : (
+                  "On track"
+                )}
+              </p>
+            </div>
+          </div>
+
+          <div className="form-footer edit-footer">
+            <SubmitButton label="Save changes" pendingLabel="Saving..." />
+            <button
+              className="secondary-button"
+              onClick={() => setIsEditing(false)}
+              type="button"
+            >
+              Cancel
+            </button>
+            <FormMessage state={editState} />
+          </div>
+        </form>
+      </li>
+    );
+  }
 
   return (
     <li className="task-item">
@@ -63,72 +172,15 @@ export function TaskCard({ task }: TaskCardProps) {
       </dl>
 
       <div className="task-actions">
-        <details className="edit-task">
-          <summary>Edit</summary>
-          <form
-            action={editAction}
-            className="task-form compact-form"
-            key={editFormKey}
-          >
-            <input name="id" type="hidden" value={task.id} />
-            <div className="form-grid">
-              <label className="field">
-                <span>Title</span>
-                <input
-                  name="title"
-                  required
-                  maxLength={120}
-                  defaultValue={task.title}
-                />
-              </label>
+        <button
+          className="secondary-button"
+          onClick={() => setIsEditing(true)}
+          type="button"
+        >
+          Edit
+        </button>
 
-              <label className="field">
-                <span>Topic</span>
-                <input
-                  name="topic"
-                  required
-                  maxLength={80}
-                  defaultValue={task.topic}
-                />
-              </label>
-
-              <label className="field">
-                <span>Due date</span>
-                <input
-                  name="dueDate"
-                  type="date"
-                  required
-                  defaultValue={task.dueDate}
-                />
-              </label>
-
-              <label className="field">
-                <span>Status</span>
-                <select name="status" defaultValue={task.status}>
-                  <option value="Todo">Todo</option>
-                  <option value="In-Progress">In-Progress</option>
-                  <option value="Complete">Complete</option>
-                </select>
-              </label>
-            </div>
-
-            <label className="field">
-              <span>Description</span>
-              <textarea
-                name="description"
-                rows={3}
-                defaultValue={task.description}
-              />
-            </label>
-
-            <div className="form-footer">
-              <SubmitButton label="Save changes" pendingLabel="Saving..." />
-              <FormMessage state={editState} />
-            </div>
-          </form>
-        </details>
-
-        <form action={archiveAction}>
+        <form action={archiveAction} className="archive-action">
           <input name="id" type="hidden" value={task.id} />
           <ArchiveButton />
           <FormMessage state={archiveState} />
