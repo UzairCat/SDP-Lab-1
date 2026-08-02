@@ -19,7 +19,7 @@ export default function RootLayout({
             __html: `
               try {
                 var mode = window.localStorage.getItem("todo-appearance-mode");
-                document.documentElement.dataset.theme = mode === "dark" ? "dark" : "light";
+                document.documentElement.dataset.theme = mode === "light" ? "light" : "dark";
               } catch (_) {}
             `,
           }}

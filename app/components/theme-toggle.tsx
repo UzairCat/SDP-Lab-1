@@ -7,11 +7,11 @@ type ThemeMode = "light" | "dark";
 const storageKey = "todo-appearance-mode";
 
 export function ThemeToggle() {
-  const [mode, setMode] = useState<ThemeMode>("light");
+  const [mode, setMode] = useState<ThemeMode>("dark");
 
   useEffect(() => {
     const savedMode = window.localStorage.getItem(storageKey);
-    const nextMode = savedMode === "dark" ? "dark" : "light";
+    const nextMode = savedMode === "light" ? "light" : "dark";
 
     setMode(nextMode);
     applyTheme(nextMode);
