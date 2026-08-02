@@ -25,7 +25,7 @@ export function CreateTaskForm() {
   return (
     <form ref={formRef} action={formAction} className="task-form">
       <div className="form-grid">
-        <label className="field">
+        <label className="field field-wide">
           <span>Title</span>
           <input name="title" required maxLength={120} />
         </label>
