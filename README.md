@@ -40,6 +40,18 @@ Then open:
 http://localhost:3001
 ```
 
+WSL note:
+
+- Prefer running the project from the WSL Linux filesystem rather than a Windows-mounted `/mnt/c/...` path.
+- If `npm run dev` prints `next dev` and then exits without showing a local URL, reinstall dependencies:
+
+```bash
+rm -rf node_modules .next
+npm ci
+npm run db:migrate
+npm run dev
+```
+
 Run the automated tests with:
 
 ```bash
