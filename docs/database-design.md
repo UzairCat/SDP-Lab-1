@@ -44,3 +44,7 @@ Schema source:
 
 - Drizzle schema: `src/db/schema.ts`
 - Generated SQLite migration: `drizzle/0000_black_black_crow.sql`
+
+## AI Declaration
+
+AI Declaration: The preceding document was generated, reviewed, and edited with the assistance of Codex[GPT-5].

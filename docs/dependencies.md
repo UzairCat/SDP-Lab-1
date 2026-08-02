@@ -14,3 +14,7 @@ The project uses the following third-party packages.
 - `@types/node`: Provides TypeScript types for Node.js APIs used by the database and tests.
 - `@types/react`: Provides TypeScript types for React components.
 - `@types/react-dom`: Provides TypeScript types for React DOM and form hooks.
+
+## AI Declaration
+
+AI Declaration: The preceding document was generated, reviewed, and edited with the assistance of Codex[GPT-5].
