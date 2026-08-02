@@ -4,6 +4,9 @@ Student Number: 2802191, Name: Uzair Mahomed
 
 A local-first todo application built with Next.js and SQLite for COMS3011A Lab 1.
 The app runs locally for a single user and stores tasks in `data/todo.db`.
+New tasks start as `Todo`; use inline editing to update task details and move tasks between `Todo`, `In-Progress`, and `Complete`.
+Archived tasks are kept out of the main list until the `View Archived Tasks` control is opened.
+The interface defaults to dark mode and remembers the selected appearance mode in the browser.
 
 Repository: <https://github.com/UzairCat/SDP-Lab-1>
 
@@ -135,7 +138,7 @@ Relationships:
 
 Archive and overdue design:
 
-- Tasks are never deleted by the app. Archiving sets `archived_at`; archived tasks remain viewable in the Archived Tasks section.
+- Tasks are never deleted by the app. Archiving sets `archived_at`; archived tasks remain viewable from the Archived Tasks section.
 - Overdue is not stored as a column and is not a status. The app derives `isOverdue` at read time from `due_date` and `status`.
 - A task is overdue when its due date is before the current local date and its status is not `Complete`.
 
@@ -152,8 +155,8 @@ They do not use or modify `data/todo.db`.
 
 Covered behavior:
 
-- Creating a task with all required fields.
-- Editing a task and reading the persisted changes.
+- Creating a task with the required fields and default `Todo` status.
+- Editing a task, including status, and reading the persisted changes.
 - Archiving a task without deleting it.
 - Deriving overdue from due date and status.
 - Sorting active tasks by topic, status, and due date.
@@ -171,5 +174,7 @@ This repository makes use of AI code generation using the following tools: Codex
 This repository does not use AI in-line editing tools.
 
 This repository makes use of AI code review using the following tools: Codex[GPT-5].
+
+The exported Codex transcript should be submitted separately with the repository link.
 
 AI Declaration: The preceding document was generated, reviewed, and edited with the assistance of Codex[GPT-5].
