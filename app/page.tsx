@@ -1,6 +1,7 @@
+import { ArchiveSection } from "./components/archive-section";
 import { CreateTaskForm } from "./components/create-task-form";
 import { SortControls } from "./components/sort-controls";
-import { ArchivedTaskCard, TaskCard } from "./components/task-card";
+import { TaskCard } from "./components/task-card";
 import { ThemeToggle } from "./components/theme-toggle";
 import {
   listActiveTasks,
@@ -78,25 +79,7 @@ export default async function Home({ searchParams }: HomeProps) {
           )}
         </section>
 
-        <section
-          className="panel archive-panel"
-          aria-labelledby="archived-tasks-title"
-        >
-          <div className="section-heading">
-            <h2 id="archived-tasks-title">Archived Tasks</h2>
-            <span>{archivedTasks.length} total</span>
-          </div>
-
-          {archivedTasks.length > 0 ? (
-            <ul className="task-list">
-              {archivedTasks.map((task) => (
-                <ArchivedTaskCard key={task.id} task={task} />
-              ))}
-            </ul>
-          ) : (
-            <p className="empty-state">No archived tasks yet.</p>
-          )}
-        </section>
+        <ArchiveSection tasks={archivedTasks} />
       </section>
     </main>
   );
