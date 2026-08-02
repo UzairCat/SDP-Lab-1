@@ -41,67 +41,11 @@ Create a production build with:
 npm run build
 ```
 
-## Third-Party Code
+## Documentation
 
-- `next`: Provides the App Router, server components, server actions, and local web app runtime.
-- `react`: Provides the component model used by the Next.js UI.
-- `react-dom`: Renders React components in the browser through Next.js.
-- `better-sqlite3`: Provides the local SQLite driver used to persist task data in `data/todo.db`.
-- `drizzle-orm`: Provides typed SQLite schema definitions and query builders for task persistence.
-- `drizzle-kit`: Generates and applies SQLite migrations from the Drizzle schema.
-- `typescript`: Provides static typing for application, database, and test code.
-- `vitest`: Runs deterministic automated tests for task behavior.
-- `@types/better-sqlite3`: Provides TypeScript types for the SQLite driver.
-- `@types/node`: Provides TypeScript types for Node.js APIs used by the database and tests.
-- `@types/react`: Provides TypeScript types for React components.
-- `@types/react-dom`: Provides TypeScript types for React DOM and form hooks.
-
-## Database Design
-
-The app uses one SQLite database file:
-
-```text
-data/todo.db
-```
-
-The database has one application table: `tasks`.
-
-Columns:
-
-- `id`: integer primary key with autoincrement.
-- `title`: required task title.
-- `description`: required text column; empty descriptions are allowed as an empty string.
-- `due_date`: required ISO-style date text in `YYYY-MM-DD` form.
-- `topic`: required task topic.
-- `status`: required task status. Allowed values are exactly `Todo`, `In-Progress`, and `Complete`.
-- `archived_at`: nullable timestamp. `NULL` means active; a timestamp means archived.
-- `created_at`: required creation timestamp, defaulted by SQLite.
-- `updated_at`: required update timestamp, defaulted by SQLite and updated by the service layer.
-
-Constraints and indexes:
-
-- `tasks_status_allowed` prevents any status outside `Todo`, `In-Progress`, and `Complete`.
-- `tasks_title_not_blank` prevents blank titles.
-- `tasks_topic_not_blank` prevents blank topics.
-- `tasks_due_date_iso` checks that SQLite can parse the due date as a date.
-- `tasks_active_due_date_idx` supports active/archived filtering and due-date ordering.
-- `tasks_topic_idx` supports topic sorting.
-- `tasks_status_idx` supports status sorting.
-
-Relationships:
-
-- There are no relationships to other tables. The lab describes a single-user local app, so all task data lives in `tasks`.
-
-Archive and overdue design:
-
-- Tasks are never deleted by the app. Archiving sets `archived_at`; archived tasks remain viewable from the Archived Tasks section.
-- Overdue is not stored as a column and is not a status. The app derives `isOverdue` at read time from `due_date` and `status`.
-- A task is overdue when its due date is before the current local date and its status is not `Complete`.
-
-Schema source:
-
-- Drizzle schema: `src/db/schema.ts`
-- Generated SQLite migration: `drizzle/0000_black_black_crow.sql`
+- Detailed running instructions: [docs/running-it.md](docs/running-it.md)
+- Third-party code and dependencies: [docs/dependencies.md](docs/dependencies.md)
+- Database design: [docs/database-design.md](docs/database-design.md)
 
 ## Testing
 
